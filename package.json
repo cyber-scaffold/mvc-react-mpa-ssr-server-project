@@ -55,7 +55,6 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-import": "^1.13.6",
     "copy-webpack-plugin": "^11.0.0",
-    "cross-spawn": "^7.0.3",
     "css-loader": "^6.8.1",
     "esbuild": "0.25.0 || 0.25.12",
     "esbuild-loader": "^4.4.0",

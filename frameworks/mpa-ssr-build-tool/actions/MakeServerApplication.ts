@@ -1,5 +1,5 @@
 import path from "path";
-import spawn from "cross-spawn";
+import nodemon from "nodemon";
 import { injectable, inject } from "inversify";
 
 import { IOCContainer } from "@/frameworks/mpa-ssr-build-tool/cores/IOCContainer";
@@ -9,15 +9,12 @@ import { ServerProjectVirtualFile } from "@/frameworks/mpa-ssr-build-tool/servic
 import { GenerateSwaggerDocsService } from "@/frameworks/mpa-ssr-build-tool/services/GenerateSwaggerDocsService";
 
 import type { Compiler } from "webpack";
-import type { ChildProcess } from "child_process";
 
 /**
  * @description 运行开发命令,可以基于cluster同时开启服务端和客户端渲染服务
  * **/
 @injectable()
 export class MakeServerApplication {
-
-  private childProcess: ChildProcess;
 
   constructor (
     @inject(FrameworkConfigManager) private readonly $FrameworkConfigManager: FrameworkConfigManager,
@@ -33,20 +30,27 @@ export class MakeServerApplication {
     const { assetsDirectoryPath } = this.$FrameworkConfigManager.getRuntimeConfig();
     await this.$ServerProjectVirtualFile.initialize();
     const webpackDevelopmentCompiler: Compiler = await this.$ServerSiderConfigManager.getWebpackDevelopmentCompiler();
+    await new Promise((resolve, reject) => {
+      webpackDevelopmentCompiler.run((error, stats) => {
+        if (error) {
+          reject(error);
+        } else {
+          // console.log(stats.toString({ colors: true }));
+          resolve(true);
+        };
+      });
+    });
+    nodemon({
+      verbose: true,
+      watch: [path.resolve(assetsDirectoryPath, "./server.js")],
+      script: path.resolve(assetsDirectoryPath, "./server.js")
+    });
     webpackDevelopmentCompiler.watch({ ignored: "**/node_modules/**" }, async (error, stats) => {
       if (error) {
         console.log(error);
       } else {
-        console.log(stats.toString({ colors: true }));
-        if (this.childProcess) {
-          this.childProcess.kill("SIGKILL");
-        };
+        // console.log(stats.toString({ colors: true }));
         await this.$GenerateSwaggerDocsService.execute();
-        this.childProcess = await spawn("node", [path.resolve(assetsDirectoryPath, "./server.js")], {
-          stdio: "inherit",
-          stderr: "inherit"
-        });
-        return false;
       };
     });
   };
@@ -75,6 +79,14 @@ export class MakeServerApplication {
 IOCContainer.bind(MakeServerApplication).toSelf().inSingletonScope();
 
 
+// if (this.childProcess) {
+//   this.childProcess.kill("SIGKILL");
+// };
+
+// this.childProcess = await spawn("node", [path.resolve(assetsDirectoryPath, "./server.js")], {
+//   stdio: "inherit",
+//   stderr: "inherit"
+// });
 
 // if (this.childProcess) {
 //   await new Promise((resolve) => {

@@ -1,13 +1,13 @@
 import { injectable, inject } from "inversify";
 import { IOCContainer } from "@/main/server/cores/IOCContainer";
 
-import { DataSourceManager } from "@/main/server/commons/Componnets/MySQL/DataSourceManager";
-import { QueryBuilderManager } from "@/main/server/commons/Componnets/MySQL/QueryBuilderManager";
-import { MySQLConnectManager } from "@/main/server/commons/Componnets/MySQL/MySQLConnectManager";
-import { RedisConnectManager } from "@/main/server/commons/Componnets/Redis/RedisConnectManager";
-import { MongooseConnectManager } from "@/main/server/commons/Componnets/MongoDB/MongooseConnectManager";
-import { LimitedRabbitmqProducer } from "@/main/server/commons/Componnets/RabbitMQ/LimitedRabbitmqProducer";
-import { LimitedRabbitmqConsumer } from "@/main/server/commons/Componnets/RabbitMQ/LimitedRabbitmqConsumer";
+import { DataSourceManager } from "@/main/server/commons/Components/MySQL/DataSourceManager";
+import { QueryBuilderManager } from "@/main/server/commons/Components/MySQL/QueryBuilderManager";
+import { MySQLConnectManager } from "@/main/server/commons/Components/MySQL/MySQLConnectManager";
+import { RedisConnectManager } from "@/main/server/commons/Components/Redis/RedisConnectManager";
+import { MongooseConnectManager } from "@/main/server/commons/Components/MongoDB/MongooseConnectManager";
+import { LimitedRabbitmqProducer } from "@/main/server/commons/Components/RabbitMQ/LimitedRabbitmqProducer";
+import { LimitedRabbitmqConsumer } from "@/main/server/commons/Components/RabbitMQ/LimitedRabbitmqConsumer";
 
 @injectable()
 export class InitialComponent {

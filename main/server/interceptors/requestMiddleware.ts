@@ -14,6 +14,5 @@ declare global {
  * 就需要在这里添加给request
  * **/
 export async function requestMiddleware(request: Request, response: Response, next: NextFunction) {
-
   next();
 };

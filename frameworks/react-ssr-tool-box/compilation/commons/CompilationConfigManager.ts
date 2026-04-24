@@ -5,7 +5,10 @@ import { IOCContainer } from "@/frameworks/react-ssr-tool-box/compilation/cores/
 import { materielsConfigTransformer } from "@/frameworks/react-ssr-tool-box/compilation/utils/materielsConfigTransformer";
 
 import type { MaterielInfoByAliasDictionaryType } from "@/frameworks/react-ssr-tool-box/compilation/utils/materielsConfigTransformer";
-import type { MaterielPairsType, PresetPairsType } from "@/frameworks/tool-box-preset-mpa";
+
+export type MaterielPairsType = [alias: string, detail: MaterielCompilationInfoType][];
+
+export type PresetPairsType = [virtualModuleName: string, virtualModuleContent: string][];
 
 export type MaterielRenderType = {
   hydrate: boolean

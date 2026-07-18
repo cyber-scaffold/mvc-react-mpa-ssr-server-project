@@ -4,7 +4,7 @@ import { IOCContainer } from "@/frameworks/mpa-ssr-build-tool/cores/IOCContainer
 import { FrameworkConfigManager } from "@/frameworks/mpa-ssr-build-tool/commons/FrameworkConfigManager";
 import { setCompileConfiguration, makeHydrationResource, makeDehydratedResource } from "@/frameworks/react-ssr-tool-box/compilation";
 
-import { dehydrationEntryFilePreset, hydrationEntryFilePreset } from "@/frameworks/tool-box-preset-mpa";
+import { dehydrationEntryFilePreset, hydrationEntryFilePreset } from "@/frameworks/preset-mpa-website";
 
 /**
  * 在构建模式下制作脱水和注水物料的控制器

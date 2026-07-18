@@ -3,7 +3,7 @@ import path from "path";
 import { promisify } from "util";
 
 import { MaterielPairsType, PresetPairsType } from "@/frameworks/react-ssr-tool-box/compilation";
-import { computedPublicPathWithRuntime } from "@/frameworks/tool-box-preset-mpa/utils/computedPublicPathWithRuntime";
+import { computedPublicPathWithRuntime } from "@/frameworks/preset-mpa-website/utils/computedPublicPathWithRuntime";
 
 export async function dehydrationEntryFilePreset(materielPairs: MaterielPairsType): Promise<PresetPairsType> {
   const hydrationTemplateFileContent = await promisify(fs.readFile)(path.resolve(__dirname, "../templates/dehydration.entry.template"), "utf-8");

@@ -3,8 +3,8 @@ import { writeFile } from "jsonfile";
 import { injectable, inject } from "inversify";
 import swaggerJSDocGenerater from "swagger-jsdoc";
 
-import { IOCContainer } from "@/frameworks/mpa-ssr-build-tool/cores/IOCContainer";
-import { FrameworkConfigManager } from "@/frameworks/mpa-ssr-build-tool/commons/FrameworkConfigManager";
+import { IOCContainer } from "@/frameworks/mpa-website-build-tool/cores/IOCContainer";
+import { FrameworkConfigManager } from "@/frameworks/mpa-website-build-tool/commons/FrameworkConfigManager";
 
 @injectable()
 export class GenerateSwaggerDocsService {

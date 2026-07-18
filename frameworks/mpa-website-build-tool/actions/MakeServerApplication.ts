@@ -2,11 +2,11 @@ import path from "path";
 import nodemon from "nodemon";
 import { injectable, inject } from "inversify";
 
-import { IOCContainer } from "@/frameworks/mpa-ssr-build-tool/cores/IOCContainer";
-import { FrameworkConfigManager } from "@/frameworks/mpa-ssr-build-tool/commons/FrameworkConfigManager";
-import { ServerSiderConfigManager } from "@/frameworks/mpa-ssr-build-tool/configs/webpack/ServerSiderConfigManager";
-import { ServerProjectVirtualFile } from "@/frameworks/mpa-ssr-build-tool/services/ServerProjectVirtualFile";
-import { GenerateSwaggerDocsService } from "@/frameworks/mpa-ssr-build-tool/services/GenerateSwaggerDocsService";
+import { IOCContainer } from "@/frameworks/mpa-website-build-tool/cores/IOCContainer";
+import { FrameworkConfigManager } from "@/frameworks/mpa-website-build-tool/commons/FrameworkConfigManager";
+import { ServerSiderConfigManager } from "@/frameworks/mpa-website-build-tool/configs/webpack/ServerSiderConfigManager";
+import { ServerProjectVirtualFile } from "@/frameworks/mpa-website-build-tool/services/ServerProjectVirtualFile";
+import { GenerateSwaggerDocsService } from "@/frameworks/mpa-website-build-tool/services/GenerateSwaggerDocsService";
 
 import type { Compiler } from "webpack";
 

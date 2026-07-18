@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 
-import { IOCContainer } from "@/frameworks/mpa-ssr-build-tool/cores/IOCContainer";
-import { FrameworkConfigManager } from "@/frameworks/mpa-ssr-build-tool/commons/FrameworkConfigManager";
+import { IOCContainer } from "@/frameworks/mpa-website-build-tool/cores/IOCContainer";
+import { FrameworkConfigManager } from "@/frameworks/mpa-website-build-tool/commons/FrameworkConfigManager";
 import { setCompileConfiguration, makeHydrationResource, makeDehydratedResource } from "@/frameworks/react-ssr-tool-box/compilation";
 
 import { dehydrationEntryFilePreset, hydrationEntryFilePreset } from "@/frameworks/preset-mpa-website";

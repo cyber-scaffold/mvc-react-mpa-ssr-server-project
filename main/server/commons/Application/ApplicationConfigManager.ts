@@ -61,12 +61,12 @@ export class ApplicationConfigManager {
       mysql: this.mysql,
       mongodb: this.mongodb,
       rabbitmq: this.rabbitmq,
-      assetsDirectoryName: resourcePathInfo.assetsDirectoryName,
+      assetsDirectoryName: resourcePathInfo.assetsDirectoryPath,
+      publicResourceDirectory: resourcePathInfo.publicResourceDirectory,
       extractResourceDirectory: resourcePathInfo.extractResourceDirectory,
       custmerStaticResourceDirectory: this.custmerStaticResourceDirectory,
-      projectStaticResourceDirectory: resourcePathInfo.projectStaticResourceDirectory,
       swaggerResourceDirectory: resourcePathInfo.swaggerResourceDirectory,
-      publicResourceDirectory: resourcePathInfo.publicResourceDirectory
+      projectStaticResourceDirectory: resourcePathInfo.projectStaticResourceDirectory
     };
   };
 

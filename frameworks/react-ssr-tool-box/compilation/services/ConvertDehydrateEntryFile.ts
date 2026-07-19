@@ -13,7 +13,6 @@ import type { MaterielCompilationInfoType } from "@/frameworks/react-ssr-tool-bo
 import type { Compiler, EntryObject } from "webpack";
 import type { IUnionFs, IFS } from "unionfs";
 
-
 /**
  * 改造注水资源的入口文件,可以在这个模块中添加架构特性
  * 实现细节如下:
@@ -23,9 +22,9 @@ import type { IUnionFs, IFS } from "unionfs";
  * @docs https://webpack.docschina.org/api/node#custom-file-systems
  * **/
 @injectable()
-export class ConvertHydrationEntryFile {
+export class ConvertDehydrateEntryFile {
 
-  private virtualDirectoryPath = path.resolve(process.cwd(), `./${uuid()}/__virtual__/hydration/`);
+  private virtualDirectoryPath = path.resolve(process.cwd(), `./${uuid()}/__virtual__/dehydrate/`);
 
   private custmerFileSystem: IUnionFs = ufs.use((memfs.fs as unknown as IFS)).use(fs);
 
@@ -41,13 +40,17 @@ export class ConvertHydrationEntryFile {
    * 并生成webpack可以识别的entry-points对象
    * **/
   public async initialize(materielPairs: [alias: string, detail: MaterielCompilationInfoType][]) {
-    const { hydrationPreset } = this.$CompilationConfigManager.getRuntimeConfig();
-    const virtualFileVolumePairs = await hydrationPreset(materielPairs);
+    const { dehydratePreset } = await this.$CompilationConfigManager.getRuntimeConfig();
+    const virtualFileVolumePairs = await dehydratePreset(materielPairs);
     /** 在内存中写入这些新入口文件的内容 **/
     memfs.vol.fromJSON(fromPairs(virtualFileVolumePairs), this.virtualDirectoryPath);
     /** 生成详细的webpackEntryPoints **/
     this.webpackEntryPoints = fromPairs(materielPairs.map(([alias]) => {
-      return [alias, [path.join(this.getVirtualDirectoryPath(), `./${alias}.entry.tsx`)]];
+      return [alias, [
+        "esbuild-register",
+        "source-map-support/register",
+        path.join(this.getVirtualDirectoryPath(), `./${alias}.entry.tsx`)
+      ]];
     }));
   };
 
@@ -68,4 +71,4 @@ export class ConvertHydrationEntryFile {
 };
 
 
-IOCContainer.bind(ConvertHydrationEntryFile).toSelf().inRequestScope()
+IOCContainer.bind(ConvertDehydrateEntryFile).toSelf().inRequestScope()
